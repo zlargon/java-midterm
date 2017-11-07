@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -71,6 +73,17 @@ public class LifeController extends AbstractLife {
 
     @Override
     public void sortPersonsByLastName() {
+        // Comparator
+        Comparator<Person> byLastName = new Comparator<Person>() {
+            public int compare(Person person1, Person person2) {
+                String name1 = person1.getLastName();
+                String name2 = person2.getLastName();
+                return name1.compareTo(name2);
+            }
+        };
+
+        // sort
+        Collections.sort(this.personList, byLastName);
     }
 
     @Override
@@ -106,6 +119,11 @@ public class LifeController extends AbstractLife {
         System.out.println("\n\nParse People from CSV:");
         List<String> personIDCSV = life.parseCSV("data.csv");
         life.loadPersons(personIDCSV);
+        life.showPersons();
+
+        // 1-2. 100 POINTS sort all persons by last name
+        System.out.println("\nSort People by last name:");
+        life.sortPersonsByLastName();
         life.showPersons();
     }
 }
