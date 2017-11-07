@@ -46,6 +46,10 @@ public class LifeController extends AbstractLife {
 
     @Override
     public void agePersons(int offset, int scale) {
+        for (Person person : this.personList) {
+            int age = person.getAge() + offset;
+            person.setAge(age);
+        }
     }
 
     @Override
@@ -124,6 +128,11 @@ public class LifeController extends AbstractLife {
         // 1-2. 100 POINTS sort all persons by last name
         System.out.println("\nSort People by last name:");
         life.sortPersonsByLastName();
+        life.showPersons();
+
+        // 2-1. increase Person age by 10 years
+        System.out.println("\nincrease Person age by 10 years:");
+        life.agePersons(10, 0);
         life.showPersons();
     }
 }
