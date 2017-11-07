@@ -10,6 +10,7 @@ public class LifeController extends AbstractLife {
 
     public List<Person> personList = new ArrayList<Person>();
     public List<Student> studentList = new ArrayList<Student>();
+    public List<Employee> employeeList = new ArrayList<Employee>();
 
     @Override
     public void loadPersons(final List<String> personIDCSV) {
@@ -65,6 +66,29 @@ public class LifeController extends AbstractLife {
 
     @Override
     public void loadEmployees(final List<String> personIDCSV) {
+        for (Student student : this.studentList) {
+            int id = student.getId();
+            String line = personIDCSV.get(id - 1);
+
+            Scanner scan = new Scanner(line);
+            scan.useDelimiter(",");
+
+            scan.next(); // id
+            scan.next(); // first name
+            scan.next(); // last name
+            scan.next(); // age
+            scan.next(); // GPA
+            double wage = scan.nextDouble();
+
+            // add student to list
+            Employee employee = new Employee(student, wage);
+
+            // add to person list
+            this.employeeList.add(employee);
+
+            // scan close
+            scan.close();
+        }
     }
 
     @Override
@@ -111,6 +135,9 @@ public class LifeController extends AbstractLife {
 
     @Override
     public void showEmployees() {
+        for (Employee employee : this.employeeList) {
+            System.out.println(employee);
+        }
     }
 
     @Override
@@ -204,5 +231,10 @@ public class LifeController extends AbstractLife {
         System.out.println("\nincrease Person age by 10 years:");
         life.ageStudents(10, 0);
         life.showStudents();
+
+        // 3-3. Initialize Employee from an already aged Student
+        System.out.println("\nInitialize Employee from an already aged Student:");
+        life.loadEmployees(personIDCSV);
+        life.showEmployees();
     }
 }
