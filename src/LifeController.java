@@ -75,6 +75,14 @@ public class LifeController extends AbstractLife {
         }
     }
 
+    // New Method: ageStudents
+    public void ageStudents(int offset, int scale) {
+        for (Student student : this.studentList) {
+            int age = student.getAge() + offset;
+            student.setAge(age);
+        }
+    }
+
     @Override
     public void scaleStudentsGPA(double offset, double scale) {
         for (Student student : this.studentList) {
@@ -190,6 +198,11 @@ public class LifeController extends AbstractLife {
         System.out.println("\nup scale GPA by 1 (add 1 to each GPA) and show a list of each Student, sorted by GPA:");
         life.scaleStudentsGPA(0, 1);
         life.sortStudentsByGPA();
+        life.showStudents();
+
+        // 3-1. increase Person (STUDENT) age by 10 years
+        System.out.println("\nincrease Person age by 10 years:");
+        life.ageStudents(10, 0);
         life.showStudents();
     }
 }
