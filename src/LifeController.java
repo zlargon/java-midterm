@@ -117,6 +117,10 @@ public class LifeController extends AbstractLife {
 
     @Override
     public void scaleEmployeeWages(double offset, double scale) {
+        for (Employee employee : this.employeeList) {
+            double wage = employee.getWage() + scale;
+            employee.setWage(wage);
+        }
     }
 
     @Override
@@ -177,6 +181,22 @@ public class LifeController extends AbstractLife {
 
     @Override
     public void sortEmployeesByWage() {
+        // Comparator
+        Comparator<Employee> byWage = new Comparator<Employee>() {
+            public int compare(Employee employee1, Employee employee2) {
+                double wage1 = employee1.getWage();
+                double wage2 = employee2.getWage();
+
+                if (wage1 == wage2) {
+                    return 0;
+                }
+
+                return wage1 > wage2 ? 1 : -1;
+            }
+        };
+
+        // sort
+        Collections.sort(this.employeeList, byWage);
     }
 
     public List<String> parseCSV (String fileName) {
@@ -235,6 +255,12 @@ public class LifeController extends AbstractLife {
         // 3-3. Initialize Employee from an already aged Student
         System.out.println("\nInitialize Employee from an already aged Student:");
         life.loadEmployees(personIDCSV);
+        life.showEmployees();
+
+        // 3-4. raise all wages by $10 and show a list of each Employee, sorted by wage
+        System.out.println("\nraise all wages by $10 and show a list of each Employee, sorted by wage:");
+        life.scaleEmployeeWages(0, 10);
+        life.sortEmployeesByWage();
         life.showEmployees();
     }
 }
