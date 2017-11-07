@@ -77,6 +77,10 @@ public class LifeController extends AbstractLife {
 
     @Override
     public void scaleStudentsGPA(double offset, double scale) {
+        for (Student student : this.studentList) {
+            double gpa = student.getGPA() + scale;
+            student.setGPA(gpa);
+        }
     }
 
     @Override
@@ -118,6 +122,22 @@ public class LifeController extends AbstractLife {
 
     @Override
     public void sortStudentsByGPA() {
+        // Comparator
+        Comparator<Student> byGPA = new Comparator<Student>() {
+            public int compare(Student student1, Student student2) {
+                double gpa1 = student1.getGPA();
+                double gpa2 = student2.getGPA();
+
+                if (gpa1 == gpa2) {
+                    return 0;
+                }
+
+                return gpa1 > gpa2 ? 1 : -1;
+            }
+        };
+
+        // sort
+        Collections.sort(this.studentList, byGPA);
     }
 
     @Override
@@ -164,6 +184,12 @@ public class LifeController extends AbstractLife {
         // 2-3. Initialize Student from an already aged Person
         System.out.println("\nInitialize Student from an already aged Person:");
         life.loadStudents(personIDCSV);
+        life.showStudents();
+
+        // 2-4. up scale GPA by 1 (add 1 to each GPA) and show a list of each Student, sorted by GPA
+        System.out.println("\nup scale GPA by 1 (add 1 to each GPA) and show a list of each Student, sorted by GPA:");
+        life.scaleStudentsGPA(0, 1);
+        life.sortStudentsByGPA();
         life.showStudents();
     }
 }
