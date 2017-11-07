@@ -36,6 +36,20 @@ public class MidTerm {
         }
     }
 
+    static public void listIteratorTransformIntData2 () {
+        List <Double> numbers = new ArrayList<Double>();
+        numbers.add(1.1);
+        numbers.add(2.1);
+        numbers.add(3.1);
+
+        Iterator<Double> it = numbers.listIterator();
+        while (it.hasNext()) {
+            double n = it.next();
+            double result = (n + 1) * 2;
+            System.out.print(result + " ");
+        }
+    }
+
     static void demo () {
         // 1. create a showIntData() method.
         System.out.println("showIntData():");
@@ -50,5 +64,10 @@ public class MidTerm {
         // Use ListIterator to transform (add 1 and multiply sum by 2) the original data and show the transformed data;
         System.out.println("\n\nlistIteratorTransformIntData1():");
         MidTerm.listIteratorTransformIntData1();
+
+        // 4. create a listIteratorTransformIntData2() method:
+        // Repeat use of ListIterator (transform data by adding 1 and multiplying sum by 2) but for the following data: 1.1, 2.1, 3.1
+        System.out.println("\n\nlistIteratorTransformIntData2():");
+        MidTerm.listIteratorTransformIntData2();
     }
 }
