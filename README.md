@@ -33,10 +33,10 @@ AbstractLife
 
 ## Complete the implementation of the API in the following classes you write:
 
-- Person derived from AbstractPerson
-- Student derived from AbstractStudent
-- Employee derived from AbstractEmployee
-- LifeController derived from AbstractLife
+- `Person` derived from `AbstractPerson`
+- `Student` derived from `AbstractStudent`
+- `Employee` derived from `AbstractEmployee`
+- `LifeController` derived from `AbstractLife`
 
 You implementation must execute and successfully perform the following:
 
@@ -57,14 +57,14 @@ Parse CSV data (ID,FirstName,LastName,Age,GPA,Wage):
 
 ## 200 TOTAL Points: Student class:
 
-1. 50 POINTS increase Person age by 10 years;.
-2. 50 POINTS Derive Student class from AbstractStudent;
-3. 50 POINTS Initialize Student from an already aged Person;
-4. 50 POINTS up scale GPA by 1 (add 1 to each GPA) and show a list of each Student, sorted by GPA;
+1. 50 POINTS increase `Person` age by 10 years
+2. 50 POINTS Derive `Student` class from `AbstractStudent`
+3. 50 POINTS Initialize `Student` from an already aged `Person`
+4. 50 POINTS up scale GPA by 1 (add 1 to each GPA) and show a list of each `Student`, sorted by GPA
 
 ## 200 TOTAL Points: Employee class:
 
-1. 50 POINTS increase Person age by 10 years.
-2. 50 POINTS Derive Employee class from AbstractEmployee;
-3. 50 POINTS Initialize Employee from an already aged Student;
-4. 50 POINTS raise all wages by $10 and show a list of each Employee, sorted by wage;
+1. 50 POINTS increase `Person` age by 10 years
+2. 50 POINTS Derive `Employee` class from `AbstractEmployee`
+3. 50 POINTS Initialize `Employee` from an already aged `Student`
+4. 50 POINTS raise all wages by $10 and show a list of each `Employee`, sorted by wage
