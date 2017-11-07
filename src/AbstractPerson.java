@@ -17,8 +17,8 @@ public abstract class AbstractPerson {
 	public abstract void setDob(LocalDate dob);
 	public abstract Gender getGender();
 	public abstract void setGender(Gender gender);
-//	public abstract int getId();
-//	public abstract void setId(int id);
+	public abstract int getId();
+	public abstract void setId(int id);
 	
 
 //	public enum Gender {
