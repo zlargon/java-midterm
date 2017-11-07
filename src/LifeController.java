@@ -6,64 +6,79 @@ import java.util.Scanner;
 
 public class LifeController extends AbstractLife {
 
+    public List<Person> personList = new ArrayList<Person>();
+
     @Override
     public void loadPersons(final List<String> personIDCSV) {
+        for (String line : personIDCSV) {
+            Scanner scan = new Scanner(line);
+            scan.useDelimiter(",");
 
+            int id           = scan.nextInt();
+            String firstName = scan.next();
+            String lastName  = scan.next();
+            int age          = scan.nextInt();
+
+            // add student to list
+            Person person = new Person();
+            person.setId(id);
+            person.setFirstName(firstName);
+            person.setLastName(lastName);
+            person.setAge(age);
+
+            // add to person list
+            this.personList.add(person);
+
+            // scan close
+            scan.close();
+        }
     }
 
     @Override
     public void loadStudents(final List<String> personIDCSV) {
-
     }
 
     @Override
     public void loadEmployees(final List<String> personIDCSV) {
-
     }
 
     @Override
     public void agePersons(int offset, int scale) {
-
     }
 
     @Override
     public void scaleStudentsGPA(double offset, double scale) {
-
     }
 
     @Override
     public void scaleEmployeeWages(double offset, double scale) {
-
     }
 
     @Override
     public void showPersons() {
-
+        for (Person person : this.personList) {
+            System.out.println(person);
+        }
     }
 
     @Override
     public void showStudents() {
-
     }
 
     @Override
     public void showEmployees() {
-
     }
 
     @Override
     public void sortPersonsByLastName() {
-
     }
 
     @Override
     public void sortStudentsByGPA() {
-
     }
 
     @Override
     public void sortEmployeesByWage() {
-
     }
 
     public List<String> parseCSV (String fileName) {
@@ -90,9 +105,7 @@ public class LifeController extends AbstractLife {
         // 1-1. 100 POINTS Instantiate Person objects from CSV data
         System.out.println("\n\nParse People from CSV:");
         List<String> personIDCSV = life.parseCSV("data.csv");
-        for (String s : personIDCSV) {
-            System.out.println(s);
-        }
-
+        life.loadPersons(personIDCSV);
+        life.showPersons();
     }
 }
