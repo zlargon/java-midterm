@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class LifeController extends AbstractLife {
 
     public List<Person> personList = new ArrayList<Person>();
+    public List<Student> studentList = new ArrayList<Student>();
 
     @Override
     public void loadPersons(final List<String> personIDCSV) {
@@ -38,6 +39,28 @@ public class LifeController extends AbstractLife {
 
     @Override
     public void loadStudents(final List<String> personIDCSV) {
+        for (Person person : this.personList) {
+            int id = person.getId();
+            String line = personIDCSV.get(id - 1);
+
+            Scanner scan = new Scanner(line);
+            scan.useDelimiter(",");
+
+            scan.next(); // id
+            scan.next(); // first name
+            scan.next(); // last name
+            scan.next(); // age
+            double gpa = scan.nextDouble();
+
+            // add student to list
+            Student student = new Student(person, gpa);
+
+            // add to person list
+            this.studentList.add(student);
+
+            // scan close
+            scan.close();
+        }
     }
 
     @Override
@@ -69,6 +92,9 @@ public class LifeController extends AbstractLife {
 
     @Override
     public void showStudents() {
+        for (Student student : this.studentList) {
+            System.out.println(student);
+        }
     }
 
     @Override
@@ -134,5 +160,10 @@ public class LifeController extends AbstractLife {
         System.out.println("\nincrease Person age by 10 years:");
         life.agePersons(10, 0);
         life.showPersons();
+
+        // 2-3. Initialize Student from an already aged Person
+        System.out.println("\nInitialize Student from an already aged Person:");
+        life.loadStudents(personIDCSV);
+        life.showStudents();
     }
 }
